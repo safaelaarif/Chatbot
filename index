@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface Step-3.5-Flash</title>
+    <style>
+        :root {
+            --primary-color: #00d2ff;
+            --bg-dark: #1a1a1a;
+            --text-light: #f0f0f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        #chat-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 20px;
+            line-height: 1.5;
+        }
+
+        .user {
+            align-self: flex-end;
+            background-color: var(--primary-color);
+            color: #000;
+            border-bottom-right-radius: 2px;
+        }
+
+        .ai {
+            align-self: flex-start;
+            background-color: #333;
+            border-bottom-left-radius: 2px;
+        }
+
+        .input-bar {
+            padding: 20px;
+            background: #252525;
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background: #444;
+            color: white;
+            outline: none;
+        }
+
+        button {
+            background: var(--primary-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Step-3.5-Flash <small style="font-size: 0.5em; vertical-align: middle;">API Interface</small></h1>
+</header>
+
+<div id="chat-container">
+    <div class="message ai">Prêt pour une réponse ultra-rapide. Que puis-je faire pour vous ?</div>
+</div>
+
+<div class="input-bar">
+    <input type="text" id="user-input" placeholder="Écrivez votre message ici...">
+    <button onclick="handleSend()">Envoyer</button>
+</div>
+
+<script>
+    function handleSend() {
+        const input = document.getElementById('user-input');
+        const container = document.getElementById('chat-container');
+
+        if (input.value.trim() === "") return;
+
+        // Ajouter message utilisateur
+        const userDiv = document.createElement('div');
+        userDiv.className = 'message user';
+        userDiv.textContent = input.value;
+        container.appendChild(userDiv);
+
+        const currentText = input.value;
+        input.value = "";
+
+        // Simulation de la vitesse "Flash"
+        setTimeout(() => {
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            aiDiv.innerHTML = "<em>[Réponse de Step-3.5-Flash]</em> : J'ai bien reçu votre message : '" + currentText + "'. Pour activer l'IA réelle, connectez ce front-end à votre clé API StepFun via un serveur proxy.";
+            container.appendChild(aiDiv);
+            container.scrollTop = container.scrollHeight;
+        }, 600);
+
+        container.scrollTop = container.scrollHeight;
+    }
+
+    // Permettre d'envoyer avec la touche Entrée
+    document.getElementById('user-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') handleSend();
+    });
+</script>
+
+</body>
+</html>
