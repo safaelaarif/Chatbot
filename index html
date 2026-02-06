@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface DeepSeek-V3 Style</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .chat-container { width: 100%; max-width: 600px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; height: 80vh; }
+        .chat-header { padding: 20px; border-bottom: 1px solid #eee; font-weight: bold; color: #2c3e50; text-align: center; }
+        .messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .message { padding: 10px 15px; border-radius: 18px; max-width: 80%; line-height: 1.4; }
+        .user { align-self: flex-end; background-color: #007bff; color: white; }
+        .ai { align-self: flex-start; background-color: #e9ecef; color: #333; }
+        .input-area { padding: 20px; border-top: 1px solid #eee; display: flex; gap: 10px; }
+        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+        button { background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">DeepSeek-V3 Interface</div>
+    <div class="messages" id="chatBox">
+        <div class="message ai">Bonjour ! Comment puis-je vous aider aujourd'hui ?</div>
+    </div>
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="Posez votre question...">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const input = document.getElementById('userInput');
+        const chatBox = document.getElementById('chatBox');
+        if (input.value.trim() !== "") {
+            // Message Utilisateur
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user';
+            userDiv.textContent = input.value;
+            chatBox.appendChild(userDiv);
+            
+            // Simulation réponse (Normalement ici on appelle l'API DeepSeek)
+            setTimeout(() => {
+                const aiDiv = document.createElement('div');
+                aiDiv.className = 'message ai';
+                aiDiv.textContent = "Ceci est une simulation. Connectez l'API pour de vraies réponses.";
+                chatBox.appendChild(aiDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+
+            input.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    }
+</script>
+
+</body>
+</html>
